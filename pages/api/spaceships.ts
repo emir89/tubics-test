@@ -10,64 +10,62 @@ function getSpaceshipsArmy(
   const keysToArray = Object.keys(availableSpaceships);
   const index = Math.floor(Math.random() * keysToArray.length);
   const numberOfAvailableShips = availableSpaceships[keysToArray[index]];
+
+  console.log('availableSpaceships', availableSpaceships)
   
   let amountToTakeFrom;
 
-  if (numberOfShipsNeeded < numberOfAvailableShips) {
+  if (numberOfShipsNeeded <= numberOfAvailableShips) {
     amountToTakeFrom = numberOfShipsNeeded - spaceshipsCount;
   } else {
-    if (numberOfAvailableShips > spaceshipsCount) {
-      amountToTakeFrom = numberOfAvailableShips - spaceshipsCount;
-    } else {
-      amountToTakeFrom = numberOfAvailableShips;
-    }
+    amountToTakeFrom = (numberOfAvailableShips - spaceshipsCount) + (numberOfShipsNeeded - numberOfAvailableShips);
   }
 
-  if (amountToTakeFrom === 0) {
-    return getSpaceshipsArmy(
-      numberOfShipsNeeded, 
-      spaceshipsCount, 
-      randomChosenSpaceships, 
-      availableSpaceships
-    );
-  }
+  console.log('numberOfShipsNeeded', numberOfShipsNeeded)
+  console.log('numberOfAvailableShips', numberOfAvailableShips)  
+  console.log('amountToTakeFrom', amountToTakeFrom)
+
+  if (amountToTakeFrom === 0) return randomChosenSpaceships;
 
 
   const spaceshipsAmountToBeAdded = Math.floor(Math.random() * (amountToTakeFrom ) + 1);
+
+  console.log('spaceshipsAmountToBeAdded', spaceshipsAmountToBeAdded)
+
+  // return;
 
   if (randomChosenSpaceships[keysToArray[index]]) {
     randomChosenSpaceships[keysToArray[index]] += spaceshipsAmountToBeAdded;
   } else {
     randomChosenSpaceships[keysToArray[index]] = spaceshipsAmountToBeAdded;
   }
+  availableSpaceships[keysToArray[index]] = numberOfAvailableShips - spaceshipsAmountToBeAdded;
 
   spaceshipsCount += spaceshipsAmountToBeAdded;
 
-  if (spaceshipsCount !== numberOfShipsNeeded) {
-    return getSpaceshipsArmy(
-      numberOfShipsNeeded, 
-      spaceshipsCount, 
-      randomChosenSpaceships, 
-      availableSpaceships
-    );
-  } else {
-    return randomChosenSpaceships;
-  }
+  return getSpaceshipsArmy(
+    numberOfShipsNeeded, 
+    spaceshipsCount, 
+    randomChosenSpaceships, 
+    availableSpaceships
+  );
 }
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-    const {numberOfShips} = req.query;
+    const {numberOfShips} = req.query as {numberOfShips: string};
+
+    if (/[A-Za-z]/.test(numberOfShips)) return res.status(400).json({error: 'Bad request. Only numbers are allowed.'});
 
     let spaceshipsCount = 0;
     let randomChosenSpaceships: any = {};
     let availableSpaceships: any = {
-      "Millennium Falcon": 5000,
-      "X-Wing": 5000,
-      "TIE Fighter": 5000,
-      "Executor": 5000
+      "Millennium Falcon": 1000,
+      "X-Wing": 1000,
+      "TIE Fighter": 1000,
+      "Executor": 1000
     }
 
     let sumOfShipsAvailable = 0;
@@ -77,7 +75,7 @@ export default function handler(
     }
 
     if (Number(numberOfShips) > sumOfShipsAvailable) { 
-      res.send({error: 'Not enough ships available'}); 
+      res.status(200).json({error: 'Not enough ships available'}); 
     } else {
       try {
         const result = getSpaceshipsArmy(
@@ -86,9 +84,9 @@ export default function handler(
           randomChosenSpaceships, 
           availableSpaceships
         );
-        res.send(result);
+        res.status(200).json(result);
       } catch (error) {
-        res.send({error: (error as Error).message});
+        res.status(200).json({error: (error as Error).message});
       }
     }
 }
