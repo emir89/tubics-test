@@ -86,7 +86,7 @@ export default function SpaceshipsArmy() {
                 </Button>
             </Box>
           </Box>
-          <Box>
+          <Box zIndex={99}>
             {isLoading && <Typography variant='h1' fontSize='2rem'>Your army is being generated...</Typography>}
             {generatedArmy.length > 0 && 
               <Box>
