@@ -10,6 +10,7 @@ import {
 import {ISpaceship} from '../components/Spaceship';
 import background from '../assets/ufo_background.gif';
 import Image from 'next/image';
+import SpaceshipList from '../components/SpaceshipList';
 
 export default function SpaceshipsArmy() {
   const [generatedArmy, setGeneratedArmy] = useState<ISpaceship[]>([]);
@@ -19,6 +20,7 @@ export default function SpaceshipsArmy() {
 
   const generateArmy = async () => {
     try {
+      let formattedData = []
       setIsLoading(true);
       const response = await fetch(`/api/spaceships?numberOfShips=${numberOfShipsTogenerate}`, {
         method: 'GET',
@@ -26,9 +28,17 @@ export default function SpaceshipsArmy() {
           'Content-Type': 'application/json',
         },
       });
-      const data = await response.json();
+      const data: {[spaceshipName: string]: number} = await response.json();
       setIsLoading(false);
       console.log(data);
+      for (const s in data) {
+        formattedData.push({
+          name: s,
+          numberOfShips: data[s]
+
+        })
+      }
+      setGeneratedArmy(formattedData);
     } catch (error) {
       console.log(error);
       setError('Something went wrong. Please try again.');
@@ -61,7 +71,7 @@ export default function SpaceshipsArmy() {
           alignItems="center" 
           height="100vh"
           >
-          <Box marginTop={20} zIndex={99} justifyContent="center">
+          <Box marginTop={{xs: 6, md:20}} zIndex={99} justifyContent="center">
             <Typography variant='h1' fontSize='2rem'>Welcome to the spaceship army generator</Typography>
             <Box sx={{ width: '100%' }} display="flex" flexDirection="column" alignItems="flex-end">
               <form style={{width: '100%'}} onSubmit={(e) => { 
@@ -86,11 +96,14 @@ export default function SpaceshipsArmy() {
                 </Button>
             </Box>
           </Box>
-          <Box zIndex={99}>
-            {isLoading && <Typography variant='h1' fontSize='2rem'>Your army is being generated...</Typography>}
+          <Box marginTop={{xs: '15rem', md: '30rem'}} zIndex={99} display="flex" justifyContent="center" sx={{position: 'absolute'}}>
+            {isLoading && <Typography variant='h5' fontSize={{xs: '1rem', md: '2rem'}}>Your army is being generated...</Typography>}
+          </Box>
+          <Box zIndex={99} sx={{marginTop: {xs: '12rem', md: '25rem'}}}>
             {generatedArmy.length > 0 && 
-              <Box>
-                <Typography variant='h1' fontSize='2rem'>Generated army</Typography>
+              <Box display="flex" flexDirection="column" gap="1.2rem" alignItems="center">
+                <Typography sx={{position: 'relative', left: 0}} variant='h3' fontSize='2rem'>Generated army</Typography>
+                <SpaceshipList spaceshipList={generatedArmy} />
               </Box>
             }
           </Box>

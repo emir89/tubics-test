@@ -4,15 +4,27 @@ import React from "react";
 export interface ISpaceship {
     name: string;
     numberOfShips: number;
-    icon: React.ReactNode;
+    icon?: React.ReactNode;
 }
 
 const Spaceship = ({ name, numberOfShips, icon }: ISpaceship) => {
   return (
-    <Box display="flex" justifyContent="column">
-        <Typography variant="h3">{name}</Typography>
-        <p>{numberOfShips}</p>
-        <div>{icon}</div>
+    <Box 
+      display="flex" 
+      flexDirection="column" 
+      alignItems="center"
+      sx={{
+        minWidth: {xs: '65%', md: 'auto'}, 
+        width: {xs: '100%', md: 'auto'},
+        border: '1px solid #fff',
+        borderRadius: '1rem',
+        padding: '1rem',
+        fontWeight: 'bold',
+      }}
+    >
+      <p>{name}</p>
+      <p>{numberOfShips}</p>
+      <div>{icon && icon}</div>
     </Box>
   )
 }

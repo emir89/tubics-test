@@ -10,8 +10,6 @@ function getSpaceshipsArmy(
   const keysToArray = Object.keys(availableSpaceships);
   const index = Math.floor(Math.random() * keysToArray.length);
   const numberOfAvailableShips = availableSpaceships[keysToArray[index]];
-
-  console.log('availableSpaceships', availableSpaceships)
   
   let amountToTakeFrom;
 
@@ -21,18 +19,9 @@ function getSpaceshipsArmy(
     amountToTakeFrom = (numberOfAvailableShips - spaceshipsCount) + (numberOfShipsNeeded - numberOfAvailableShips);
   }
 
-  console.log('numberOfShipsNeeded', numberOfShipsNeeded)
-  console.log('numberOfAvailableShips', numberOfAvailableShips)  
-  console.log('amountToTakeFrom', amountToTakeFrom)
-
   if (amountToTakeFrom === 0) return randomChosenSpaceships;
 
-
   const spaceshipsAmountToBeAdded = Math.floor(Math.random() * (amountToTakeFrom ) + 1);
-
-  console.log('spaceshipsAmountToBeAdded', spaceshipsAmountToBeAdded)
-
-  // return;
 
   if (randomChosenSpaceships[keysToArray[index]]) {
     randomChosenSpaceships[keysToArray[index]] += spaceshipsAmountToBeAdded;
