@@ -9,7 +9,7 @@ import {
   Input, 
   FormHelperText
 } from '@mui/material';
-import {ISpaceship} from './components/Ship';
+import {ISpaceship} from '../components/Ship';
 
 export default function SpaceshipsArmy() {
   const [generatedArmy, setGeneratedArmy] = useState<ISpaceship[]>([]);
