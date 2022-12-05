@@ -60,9 +60,9 @@ export default function handler(
     let randomChosenSpaceships: RandomChosenSpaceships = {};
     let availableSpaceships: AvailableSpaceships = {
       "Millennium Falcon": 5000,
-      "X-Wing": 2000,
-      "TIE Fighter": 4230,
-      "Enterprise": 3150,
+      "X-Wing": 5000,
+      "TIE Fighter": 5000,
+      "Enterprise": 5000,
       "Galactica": 5000,
     }
 
