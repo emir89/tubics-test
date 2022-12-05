@@ -22,7 +22,7 @@ export default function SpaceshipsArmy() {
     try {
       let formattedData = []
       setIsLoading(true);
-      const response = await fetch(`/api/spaceships?numberOfShips=${numberOfShipsToGenerate}`, {
+      const response = await fetch(`/api/spaceships?numberOfShips=${numberOfShipsToGenerate}&accessToken=H12GG3ZoHWRoyyK7`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

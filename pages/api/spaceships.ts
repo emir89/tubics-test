@@ -52,7 +52,9 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-    const {numberOfShips} = req.query as {numberOfShips: string};
+    const {numberOfShips, accessToken} = req.query as {numberOfShips: string, accessToken: string};
+
+    if (!accessToken || accessToken !== 'H12GG3ZoHWRoyyK7') return res.status(401).json({error: 'Unauthorized'});
 
     if (/[A-Za-z]/.test(numberOfShips)) return res.status(400).json({error: 'Bad request. Only numbers are allowed.'});
 
