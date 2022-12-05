@@ -16,13 +16,13 @@ import { ToastContainer, toast } from 'react-toastify';
 export default function SpaceshipsArmy() {
   const [generatedArmy, setGeneratedArmy] = useState<ISpaceship[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [numberOfShipsTogenerate, setNumberOfShipsTogenerate] = useState(0);
+  const [numberOfShipsToGenerate, setNumberOfShipsToGenerate] = useState(0);
 
   const generateArmy = async () => {
     try {
       let formattedData = []
       setIsLoading(true);
-      const response = await fetch(`/api/spaceships?numberOfShips=${numberOfShipsTogenerate}`, {
+      const response = await fetch(`/api/spaceships?numberOfShips=${numberOfShipsToGenerate}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export default function SpaceshipsArmy() {
 
   const handleNumberOfShipsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const numberOfShips = Number(event.target.value);
-    setNumberOfShipsTogenerate(numberOfShips);
+    setNumberOfShipsToGenerate(numberOfShips);
   }
 
   return (
@@ -93,7 +93,7 @@ export default function SpaceshipsArmy() {
                 <Button  
                   sx={{marginTop: "2rem", position: "relative", right: 0}} 
                   variant="contained" 
-                  disabled={isLoading || numberOfShipsTogenerate === 0}
+                  disabled={isLoading || numberOfShipsToGenerate === 0}
                   onClick={generateArmy}>
                     Generate
                   </Button>
