@@ -32,7 +32,6 @@ export default function SpaceshipsArmy() {
       setIsLoading(false);
 
       if (data.error) {
-        console.log('setujem error')
         toast.error(data.error);
         return;
       }

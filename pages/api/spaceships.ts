@@ -59,10 +59,11 @@ export default function handler(
     let spaceshipsCount = 0;
     let randomChosenSpaceships: RandomChosenSpaceships = {};
     let availableSpaceships: AvailableSpaceships = {
-      "Millennium Falcon": 1000,
-      "X-Wing": 1000,
-      "TIE Fighter": 1000,
-      "Executor": 1000
+      "Millennium Falcon": 5000,
+      "X-Wing": 2000,
+      "TIE Fighter": 4230,
+      "Enterprise": 3150,
+      "Galactica": 5000,
     }
 
     let sumOfShipsAvailable = 0;
@@ -72,7 +73,7 @@ export default function handler(
     }
 
     if (Number(numberOfShips) > sumOfShipsAvailable) { 
-      res.status(200).json({error: 'Not enough ships available'}); 
+      res.status(200).json({error: 'Not enough ships available.'}); 
     } else {
       try {
         const result = getSpaceshipsArmy(

@@ -34,4 +34,4 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## API (algorithm) testing
-YOu could manually test the how the generating algorithm works by visiting http://localhostL3000/api/spaceships?numberOfShips=numberOfShipsToGenerate or https://tubics-test.vercel.app/api/spaceships?numberOfShips=numberOfShipsToGenerate and change `numberOfShipsToGenerate` to get the results.
+YOu could manually test how the generating algorithm works by visiting http://localhostL3000/api/spaceships?numberOfShips=numberOfShipsToGenerate or https://tubics-test.vercel.app/api/spaceships?numberOfShips=numberOfShipsToGenerate and change `numberOfShipsToGenerate` to get the results.
