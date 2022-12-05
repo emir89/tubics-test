@@ -73,7 +73,7 @@ export default function SpaceshipsArmy() {
             height="100vh"
             >
             <Box marginTop={{xs: 6, md:20}} zIndex={99} justifyContent="center">
-              <Typography variant='h1' fontSize='2rem' sx={{textAlign: {xs: 'center'}}}>Welcome to the spaceship army generator</Typography>
+              <Typography variant='h1' fontSize='2rem' sx={{textAlign: {xs: 'center'}}}>Welcome to the spaceship army generator!</Typography>
               <Box sx={{ width: '100%' }} display="flex" flexDirection="column" alignItems="flex-end">
                 <form style={{width: '100%'}} onSubmit={(e) => { 
                   e.preventDefault(); 
