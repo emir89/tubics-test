@@ -1,12 +1,20 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+interface RandomChosenSpaceships {
+  [key: string]: number;
+}
+
+interface AvailableSpaceships {
+  [key: string]: number;
+}
+
 function getSpaceshipsArmy(
   numberOfShipsNeeded: number, 
   spaceshipsCount: number, 
-  randomChosenSpaceships: any,
-  availableSpaceships: any
-  ): any {
+  randomChosenSpaceships: RandomChosenSpaceships,
+  availableSpaceships: AvailableSpaceships
+  ): RandomChosenSpaceships {
   const keysToArray = Object.keys(availableSpaceships);
   const index = Math.floor(Math.random() * keysToArray.length);
   const numberOfAvailableShips = availableSpaceships[keysToArray[index]];
@@ -49,8 +57,8 @@ export default function handler(
     if (/[A-Za-z]/.test(numberOfShips)) return res.status(400).json({error: 'Bad request. Only numbers are allowed.'});
 
     let spaceshipsCount = 0;
-    let randomChosenSpaceships: any = {};
-    let availableSpaceships: any = {
+    let randomChosenSpaceships: RandomChosenSpaceships = {};
+    let availableSpaceships: AvailableSpaceships = {
       "Millennium Falcon": 1000,
       "X-Wing": 1000,
       "TIE Fighter": 1000,

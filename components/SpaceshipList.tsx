@@ -7,8 +7,6 @@ interface SpaceshipListProps {
 }
 
 const SpaceshipList = ({spaceshipList}: SpaceshipListProps) => {
-    console.log('spaceshipList', spaceshipList);
-
   return (
     <Grid sx={{
             display: 'flex',  

@@ -5,6 +5,8 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import createEmotionCache from '../util/createEmotionCache';
 import darkTheme from '../styles/theme/darkTheme';
 import '../styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const clientSideEmotionCache = createEmotionCache();
 
